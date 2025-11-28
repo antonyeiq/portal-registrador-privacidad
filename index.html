@@ -83,6 +83,49 @@
         color: #666;
         font-size: 14px;
       }
+
+      .tabs {
+        display: flex;
+        border-bottom: 3px solid #18365d;
+        background: #f5f5f5;
+      }
+
+      .tab {
+        padding: 14px 22px;
+        cursor: pointer;
+        font-weight: bold;
+        border-right: 1px solid #ccc;
+        transition: 0.3s;
+        color: #18365d;
+      }
+
+      .tab:hover {
+        background: #e6e6e6;
+      }
+
+      .tab.active {
+        background: #18365d;
+        color: #fff;
+      }
+
+      .tab-content {
+        display: none;
+        padding: 25px;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
@@ -98,288 +141,533 @@
       </div>
     </header>
 
-    <main class="main-container">
-      <h1>
-        Política de Privacidad – Aplicativo “Portal del Registrador Civil”
-      </h1>
+    <div class="tabs">
+      <div class="tab active" onclick="openTab('es')">Español</div>
+      <div class="tab" onclick="openTab('en')">Inglés</div>
+    </div>
 
-      <p>
-        El Registro Nacional de Identificación y Estado Civil (RENIEC) pone a
-        disposición el aplicativo móvil
-        <strong>“PORTAL DEL REGISTRADOR CIVIL”</strong>. Esta Política de
-        Privacidad explica qué datos recopilamos, con qué finalidad, durante
-        cuánto tiempo se conservan, con quién se comparten y cómo puede el
-        usuario ejercer sus derechos.
-      </p>
+    <div id="es" class="tab-content active">
+      <main class="main-container">
+        <h1>
+          Política de Privacidad – Aplicativo “Portal del Registrador Civil”
+        </h1>
 
-      <h2>1. Resumen rápido (para usuarios)</h2>
-      <ul>
-        <li>
-          La app solicita permisos para <strong>acceso a Internet</strong> y
-          <strong>escritura en almacenamiento</strong> (para descargar/guardar
-          formularios y reportes).
-        </li>
-        <li>
-          La comunicación con los servidores de RENIEC se realiza mediante
-          llamadas HTTP(S) (librerías Retrofit/OkHttp); los tokens JWT se
-          procesan localmente.
-        </li>
-        <li>
-          No se utilizan SDKs de publicidad ni SDKs de analítica de terceros (no
-          se envían datos a proveedores de ads/analytics según las dependencias
-          listadas).
-        </li>
-        <li>
-          Para cualquier consulta sobre esta Política de privacidad, puede contactarnos:
+        <p>
+          El Registro Nacional de Identificación y Estado Civil (RENIEC) pone a
+          disposición el aplicativo móvil
+          <strong>“PORTAL DEL REGISTRADOR CIVIL”</strong>. Esta Política de
+          Privacidad explica qué datos recopilamos, con qué finalidad, durante
+          cuánto tiempo se conservan, con quién se comparten y cómo puede el
+          usuario ejercer sus derechos.
+        </p>
+
+        <h2>1. Resumen rápido (para usuarios)</h2>
+        <ul>
+          <li>
+            La app solicita permisos para <strong>acceso a Internet</strong> y
+            <strong>escritura en almacenamiento</strong> (para descargar/guardar
+            formularios y reportes).
+          </li>
+          <li>
+            La comunicación con los servidores de RENIEC se realiza mediante
+            llamadas HTTP(S) (librerías Retrofit/OkHttp); los tokens JWT se
+            procesan localmente.
+          </li>
+          <li>
+            No se utilizan SDKs de publicidad ni SDKs de analítica de terceros
+            (no se envían datos a proveedores de ads/analytics según las
+            dependencias listadas).
+          </li>
+          <li>
+            Para cualquier consulta sobre esta Política de privacidad, puede
+            contactarnos:
+            <strong>sirc@reniec.gob.pe</strong>
+          </li>
+        </ul>
+
+        <h2>2. Información que recopilamos</h2>
+
+        <h3>2.1 Datos que proporciona el usuario</h3>
+        <ul>
+          <li>
+            Nombre, número de documento (DNI) u otros datos de identificación
+            necesarios para asignar credenciales.
+          </li>
+          <li>
+            Credenciales (usuario y contraseña) creadas para acceder a la
+            aplicación.
+          </li>
+          <li>
+            Información ingresada en formularios, consultas técnico-registrales
+            y solicitudes que el usuario realiza dentro de la aplicación.
+          </li>
+        </ul>
+
+        <h3>2.2 Datos recopilados automáticamente</h3>
+        <ul>
+          <li>
+            Información técnica del dispositivo: modelo de dispositivo, versión
+            de Android.
+          </li>
+          <li>
+            Dirección IP y registros técnicos (logs) para diagnóstico y mejora
+            del servicio.
+          </li>
+          <li>
+            Registros de errores y rendimiento del aplicativo (crash logs).
+          </li>
+        </ul>
+
+        <h3>2.3 Datos que <strong>no</strong> recopilamos</h3>
+        <p>
+          De acuerdo con la configuración y dependencias actuales, la aplicación
+          <strong>no</strong> recopila ni transfiere datos de ubicación GPS,
+          contactos, cámara, micrófono, sensores biométricos ni información de
+          pago, salvo que lo indique una versión futura de la aplicación.
+        </p>
+
+        <h2>3. Permisos Android y su finalidad</h2>
+        <p>
+          A continuación se explican los permisos que utiliza la aplicación y
+          por qué son necesarios:
+        </p>
+        <ul>
+          <li>
+            <strong>android.permission.INTERNET</strong>: necesario para
+            comunicarse con los servidores de RENIEC (consultas, descargas de
+            formularios, sincronización). Todas las llamadas de red se realizan
+            mediante librerías HTTP (Retrofit + OkHttp) y deberían usar HTTPS.
+          </li>
+          <li>
+            <strong>android.permission.ACCESS_DOWNLOAD_MANAGER</strong> (o el
+            uso del Download Manager): permite descargar formularios, libros o
+            archivos desde el servidor y administrar descargas en segundo plano.
+          </li>
+          <li>
+            <strong>android.permission.WRITE_EXTERNAL_STORAGE</strong>: permite
+            guardar archivos descargados (formularios, reportes) en el
+            almacenamiento del dispositivo para que el usuario pueda abrirlos o
+            compartirlos localmente. En versiones de Android más recientes, este
+            permiso puede ser manejado mediante almacenamiento específico de la
+            app (Scoped Storage), y recomendamos usar la API de almacenamiento
+            de Android cuando sea posible.
+          </li>
+        </ul>
+
+        <h2>4. Dependencias / SDKs y tratamiento de datos</h2>
+        <p>La aplicación utiliza las siguientes bibliotecas.</p>
+
+        <h3>Explicación y impacto en la privacidad</h3>
+        <ul>
+          <li>
+            <strong>Retrofit (com.squareup.retrofit2)</strong>: cliente HTTP
+            usado para comunicarse con los servidores; no envía datos por sí
+            mismo fuera de las llamadas que realiza la app. Todo el tráfico debe
+            ir al backend de RENIEC.
+          </li>
+          <li>
+            <strong>Gson (com.google.code.gson)</strong>: librería para
+            convertir objetos JSON; se usa localmente para parsear respuestas.
+          </li>
+          <li>
+            <strong>OkHttp Logging Interceptor</strong>: útil en desarrollo para
+            registrar peticiones y respuestas HTTP.
+            <strong>En producción</strong> recomendamos que el interceptor de
+            logging NO registre información sensible (tokens, datos personales)
+            o que esté deshabilitado. Si queda activo y los logs se almacenan o
+            se envían a un servidor, esos logs podrían contener datos; por ello
+            la configuración debe evitar registrar información sensible.
+          </li>
+          <li>
+            <strong>Auth0 jwtdecode</strong>: se usa para decodificar tokens JWT
+            localmente (por ej. para leer claims). El procesamiento es local en
+            el dispositivo; la librería no envía tokens a terceros por sí misma.
+          </li>
+          <li>
+            <strong>Facebook Shimmer</strong> y librerías AndroidX (appcompat,
+            material, constraintlayout): son componentes de interfaz; no envían
+            datos.
+          </li>
+        </ul>
+
+        <h2>5. Cómo usamos los datos</h2>
+        <ul>
+          <li>
+            Autenticación y autorización del usuario en el aplicativo (tokens /
+            sesión).
+          </li>
+          <li>
+            Procesamiento de consultas técnico-registrales y gestión de
+            solicitudes.
+          </li>
+          <li>
+            Descarga y almacenamiento local de formularios y reportes
+            solicitados por el usuario.
+          </li>
+          <li>
+            Soporte, diagnóstico y mejora del servicio mediante logs y reportes
+            de fallos (siempre minimizando datos personales en logs).
+          </li>
+        </ul>
+
+        <h2>6. Compartición de datos</h2>
+        <p>
+          RENIEC no vende ni alquila datos personales. Los datos personales
+          solamente podrán ser compartidos en los siguientes supuestos:
+        </p>
+        <ul>
+          <li>Requerimientos legales o por mandato de autoridad competente.</li>
+          <li>
+            Con áreas internas del RENIEC que requieran el acceso para la
+            prestación del servicio.
+          </li>
+          <li>
+            Con proveedores técnicos que presten servicios a RENIEC,
+            <em>únicamente</em> cuando sea estrictamente necesario y con
+            contratos que garanticen la protección de datos (y limitando el
+            acceso a datos personales cuando sea posible).
+          </li>
+        </ul>
+
+        <h2>7. Transferencias internacionales</h2>
+        <p>
+          Si en algún futuro los datos son transferidos fuera del territorio
+          nacional, RENIEC se asegurará de que las transferencias se realicen
+          conforme a la normativa aplicable y con las garantías adecuadas.
+        </p>
+
+        <h2>8. Seguridad de la información</h2>
+        <ul>
+          <li>Comunicaciones cifradas mediante HTTPS (TLS).</li>
+          <li>
+            Controles de acceso internos y encriptación de credenciales en
+            almacenamiento seguro.
+          </li>
+          <li>Monitoreo y detección de accesos no autorizados.</li>
+          <li>
+            Minimización de la información registrada en logs (evitar incluir
+            datos sensibles).
+          </li>
+        </ul>
+
+        <h2>9. Conservación de datos</h2>
+        <p>
+          Los datos se conservarán mientras el usuario mantenga su condición de
+          registrador civil activo o por los plazos exigidos por la normativa
+          aplicable. Una vez vencido el periodo de conservación aplicable,
+          RENIEC procederá a la eliminación o anonimización de los datos.
+        </p>
+
+        <h2>10. Derechos del usuario</h2>
+        <p>
+          El usuario puede ejercer los derechos de acceso, rectificación,
+          supresión, limitación y oposición (según corresponda por la normativa)
+          contactando al responsable:
+        </p>
+        <p><strong>Correo:</strong> sirc@reniec.gob.pe</p>
+
+        <h2>11. Declaración para Google Play (Data safety)</h2>
+        <p>
+          Para facilitar la correcta declaración en Play Console, indicamos:
+        </p>
+        <ul>
+          <li>
+            <strong>Datos recolectados:</strong> Identificadores (DNI/usuario),
+            Datos de contacto si se proporcionan en formularios, Datos técnicos
+            del dispositivo, Registros de uso y fallos.
+          </li>
+          <li>
+            <strong>Uso:</strong> Autenticación, funcionalidad del servicio,
+            diagnóstico, descarga de contenido.
+          </li>
+          <li>
+            <strong>Compartición:</strong> No se comparten con anunciantes ni
+            plataformas de analítica de terceros según las dependencias
+            actuales. Compartición limitada a requerimientos legales y
+            proveedores técnicos necesarios.
+          </li>
+          <li><strong>Encriptado en tránsito:</strong> Sí (HTTPS/TLS).</li>
+          <li>
+            <strong>Encriptado en reposo:</strong> Depende de la configuración
+            de servidor; las credenciales y tokens se almacenan con medidas de
+            seguridad en el backend y en el dispositivo según buenas prácticas.
+          </li>
+        </ul>
+
+        <h2>12. Cambios en esta Política</h2>
+        <p>
+          RENIEC podrá actualizar esta política cuando sea necesario. Las
+          modificaciones se publicarán en esta página con la fecha de vigencia.
+        </p>
+
+        <h2>13. Contacto</h2>
+        <p>
+          Para dudas, consultas o solicitudes relacionadas con privacidad de
+          datos, por favor escribir a:
+        </p>
+        <p>
           <strong>sirc@reniec.gob.pe</strong>
-        </li>
-      </ul>
+        </p>
 
-      <h2>2. Información que recopilamos</h2>
+        <hr style="margin-top: 26px" />
+      </main>
+    </div>
 
-      <h3>2.1 Datos que proporciona el usuario</h3>
-      <ul>
-        <li>
-          Nombre, número de documento (DNI) u otros datos de identificación
-          necesarios para asignar credenciales.
-        </li>
-        <li>
-          Credenciales (usuario y contraseña) creadas para acceder a la
-          aplicación.
-        </li>
-        <li>
-          Información ingresada en formularios, consultas técnico-registrales y
-          solicitudes que el usuario realiza dentro de la aplicación.
-        </li>
-      </ul>
+    <div id="en" class="tab-content">
+      <main class="main-container">
+        <h1>Privacy Policy – ​​“Civil Registrar Portal” Application</h1>
 
-      <h3>2.2 Datos recopilados automáticamente</h3>
-      <ul>
-        <li>
-          Información técnica del dispositivo: modelo de dispositivo, versión de
-          Android.
-        </li>
-        <li>
-          Dirección IP y registros técnicos (logs) para diagnóstico y mejora del
-          servicio.
-        </li>
-        <li>Registros de errores y rendimiento del aplicativo (crash logs).</li>
-      </ul>
+        <p>
+          The National Registry of Identification and Civil Status (RENIEC)
+          provides the mobile application
+          <strong>“PORTAL DEL REGISTRADOR CIVIL”</strong>. This Privacy Policy
+          explains what data we collect, for what purpose, how long it is kept,
+          with whom it is shared, and how users can exercise their rights.
+        </p>
 
-      <h3>2.3 Datos que <strong>no</strong> recopilamos</h3>
-      <p>
-        De acuerdo con la configuración y dependencias actuales, la aplicación
-        <strong>no</strong> recopila ni transfiere datos de ubicación GPS,
-        contactos, cámara, micrófono, sensores biométricos ni información de
-        pago, salvo que lo indique una versión futura de la aplicación.
-      </p>
+        <h2>1. Quick summary (for users)</h2>
+        <ul>
+          <li>
+            The app requests permissions for <strong>internet access</strong> y
+            <strong>writing to storage</strong> (to download/save forms and
+            reports).
+          </li>
+          <li>
+            Communication with RENIEC servers is done through HTTP(S) calls
+            (Retrofit/OkHttp libraries); JWT tokens are processed locally.
+          </li>
+          <li>
+            No third-party advertising SDKs or analytics SDKs are used (no data
+            is sent to ad/analytics providers based on the listed dependencies).
+          </li>
+          <li>
+            For any questions regarding this Privacy Policy, you can contact us
+            at:
+            <strong>sirc@reniec.gob.pe</strong>
+          </li>
+        </ul>
 
-      <h2>3. Permisos Android y su finalidad</h2>
-      <p>
-        A continuación se explican los permisos que utiliza la aplicación y por
-        qué son necesarios:
-      </p>
-      <ul>
-        <li>
-          <strong>android.permission.INTERNET</strong>: necesario para
-          comunicarse con los servidores de RENIEC (consultas, descargas de
-          formularios, sincronización). Todas las llamadas de red se realizan
-          mediante librerías HTTP (Retrofit + OkHttp) y deberían usar HTTPS.
-        </li>
-        <li>
-          <strong>android.permission.ACCESS_DOWNLOAD_MANAGER</strong> (o el uso
-          del Download Manager): permite descargar formularios, libros o
-          archivos desde el servidor y administrar descargas en segundo plano.
-        </li>
-        <li>
-          <strong>android.permission.WRITE_EXTERNAL_STORAGE</strong>: permite
-          guardar archivos descargados (formularios, reportes) en el
-          almacenamiento del dispositivo para que el usuario pueda abrirlos o
-          compartirlos localmente. En versiones de Android más recientes, este
-          permiso puede ser manejado mediante almacenamiento específico de la
-          app (Scoped Storage), y recomendamos usar la API de almacenamiento de
-          Android cuando sea posible.
-        </li>
-      </ul>
+        <h2>2. Information we collect</h2>
 
-      <h2>4. Dependencias / SDKs y tratamiento de datos</h2>
-      <p>La aplicación utiliza las siguientes bibliotecas.</p>
+        <h3>2.1 Data provided by the user</h3>
+        <ul>
+          <li>
+            Name, document number (ID) or other identification data necessary to
+            assign credentials.
+          </li>
+          <li>
+            Credentials (username and password) created to access the
+            application.
+          </li>
+          <li>
+            Information entered in forms, technical-registration queries and
+            requests that the user makes within the application.
+          </li>
+        </ul>
 
-      <h3>Explicación y impacto en la privacidad</h3>
-      <ul>
-        <li>
-          <strong>Retrofit (com.squareup.retrofit2)</strong>: cliente HTTP usado
-          para comunicarse con los servidores; no envía datos por sí mismo fuera
-          de las llamadas que realiza la app. Todo el tráfico debe ir al backend
-          de RENIEC.
-        </li>
-        <li>
-          <strong>Gson (com.google.code.gson)</strong>: librería para convertir
-          objetos JSON; se usa localmente para parsear respuestas.
-        </li>
-        <li>
-          <strong>OkHttp Logging Interceptor</strong>: útil en desarrollo para
-          registrar peticiones y respuestas HTTP.
-          <strong>En producción</strong> recomendamos que el interceptor de
-          logging NO registre información sensible (tokens, datos personales) o
-          que esté deshabilitado. Si queda activo y los logs se almacenan o se
-          envían a un servidor, esos logs podrían contener datos; por ello la
-          configuración debe evitar registrar información sensible.
-        </li>
-        <li>
-          <strong>Auth0 jwtdecode</strong>: se usa para decodificar tokens JWT
-          localmente (por ej. para leer claims). El procesamiento es local en el
-          dispositivo; la librería no envía tokens a terceros por sí misma.
-        </li>
-        <li>
-          <strong>Facebook Shimmer</strong> y librerías AndroidX (appcompat,
-          material, constraintlayout): son componentes de interfaz; no envían
-          datos.
-        </li>
-      </ul>
+        <h3>2.2 Automatically Collected Data</h3>
+        <ul>
+          <li>
+            Technical information about the device: device model, Android
+            version.
+          </li>
+          <li>
+            IP address and technical logs for service diagnosis and improvement.
+          </li>
+          <li>Application crash logs and error logs.</li>
+        </ul>
 
+        <h3>2.3 Data that we <strong>do not</strong> collect</h3>
+        <p>
+          Based on current configuration and dependencies, the application
+          <strong>does not</strong> collect or transfer GPS location data,
+          contacts, camera, microphone, biometric sensors, or payment
+          information, unless specified in a future version of the application.
+        </p>
 
-      <h2>5. Cómo usamos los datos</h2>
-      <ul>
-        <li>
-          Autenticación y autorización del usuario en el aplicativo (tokens /
-          sesión).
-        </li>
-        <li>
-          Procesamiento de consultas técnico-registrales y gestión de
-          solicitudes.
-        </li>
-        <li>
-          Descarga y almacenamiento local de formularios y reportes solicitados
-          por el usuario.
-        </li>
-        <li>
-          Soporte, diagnóstico y mejora del servicio mediante logs y reportes de
-          fallos (siempre minimizando datos personales en logs).
-        </li>
-      </ul>
+        <h2>3. Android Permissions and Their Purpose</h2>
+        <p>
+          The following explains the permissions used by the application and why
+          they are necessary:
+        </p>
+        <ul>
+          <li>
+            <strong>android.permission.INTERNET</strong>: Required for
+            communication with RENIEC servers (queries, form downloads,
+            synchronization). All network calls are made using HTTP libraries
+            (Retrofit + OkHttp) and should use HTTPS.
+          </li>
+          <li>
+            <strong>android.permission.ACCESS_DOWNLOAD_MANAGER</strong> (or the
+            use of the Download Manager): Allows you to download forms, books,
+            or files from the server and manage background downloads.
+          </li>
+          <li>
+            <strong>android.permission.WRITE_EXTERNAL_STORAGE</strong>: Allows
+            downloaded files (forms, reports) to be saved to the device's
+            storage so the user can open or share them locally. In newer
+            versions of Android, this permission can be handled using
+            app-specific storage (Scoped Storage), and we recommend using the
+            Android Storage API whenever possible.
+          </li>
+        </ul>
 
-      <h2>6. Compartición de datos</h2>
-      <p>
-        RENIEC no vende ni alquila datos personales. Los datos personales
-        solamente podrán ser compartidos en los siguientes supuestos:
-      </p>
-      <ul>
-        <li>Requerimientos legales o por mandato de autoridad competente.</li>
-        <li>
-          Con áreas internas del RENIEC que requieran el acceso para la
-          prestación del servicio.
-        </li>
-        <li>
-          Con proveedores técnicos que presten servicios a RENIEC,
-          <em>únicamente</em> cuando sea estrictamente necesario y con contratos
-          que garanticen la protección de datos (y limitando el acceso a datos
-          personales cuando sea posible).
-        </li>
-      </ul>
+        <h2>4. Dependencies / SDKs and data processing</h2>
+        <p>The application uses the following libraries.</p>
 
-      <h2>7. Transferencias internacionales</h2>
-      <p>
-        Si en algún futuro los datos son transferidos fuera del territorio
-        nacional, RENIEC se asegurará de que las transferencias se realicen
-        conforme a la normativa aplicable y con las garantías adecuadas.
-      </p>
+        <h3>Explanation and impact on privacy</h3>
+        <ul>
+          <li>
+            <strong>Retrofit (com.squareup.retrofit2)</strong>: HTTP client used
+            to communicate with the servers; it does not send data itself
+            outside of the calls made by the app. All traffic must go to the
+            RENIEC backend.
+          </li>
+          <li>
+            <strong>Gson (com.google.code.gson)</strong>: library for converting
+            JSON objects; used locally to parse responses.
+          </li>
+          <li>
+            <strong>OkHttp Logging Interceptor</strong>: Useful in development
+            for logging HTTP requests and responses.
+            <strong>In producction</strong> we recommend that the logging
+            interceptor NOT log sensitive information (tokens, personal data) or
+            that it be disabled. If it remains active and the logs are stored or
+            sent to a server, those logs could contain data; therefore, the
+            configuration should avoid logging sensitive information.
+          </li>
+          <li>
+            <strong>Auth0 jwtdecode</strong>: Used to decode JWT tokens locally
+            (e.g., to read claims). Processing is local to the device; the
+            library does not send tokens to third parties itself.
+          </li>
+          <li>
+            <strong>Facebook Shimmer</strong> and AndroidX libraries (appcompat,
+            material, constraintlayout): are interface components; they do not
+            send data.
+          </li>
+        </ul>
 
-      <h2>8. Seguridad de la información</h2>
-      <ul>
-        <li>Comunicaciones cifradas mediante HTTPS (TLS).</li>
-        <li>
-          Controles de acceso internos y encriptación de credenciales en
-          almacenamiento seguro.
-        </li>
-        <li>Monitoreo y detección de accesos no autorizados.</li>
-        <li>
-          Minimización de la información registrada en logs (evitar incluir
-          datos sensibles).
-        </li>
-      </ul>
+        <h2>5. How we use the data</h2>
+        <ul>
+          <li>
+            User authentication and authorization in the application (tokens /
+            session).
+          </li>
+          <li>
+            Processing of technical-registration queries and management of
+            requests.
+          </li>
+          <li>
+            Download and local storage of forms and reports requested by the
+            user.
+          </li>
+          <li>
+            Support, diagnosis and improvement of the service through logs and
+            fault reports (always minimizing personal data in logs).
+          </li>
+        </ul>
 
-      <h2>9. Conservación de datos</h2>
-      <p>
-        Los datos se conservarán mientras el usuario mantenga su condición de
-        registrador civil activo o por los plazos exigidos por la normativa
-        aplicable. Una vez vencido el periodo de conservación aplicable, RENIEC
-        procederá a la eliminación o anonimización de los datos.
-      </p>
+        <h2>6. Data sharing</h2>
+        <p>
+          RENIEC does not sell or rent personal data. Personal data may only be
+          shared in the following circumstances:
+        </p>
+        <ul>
+          <li>Legal requirements or by order of a competent authority.</li>
+          <li>
+            With internal areas of RENIEC that require access for the provision
+            of the service.
+          </li>
+          <li>
+            With technical providers that provide services to RENIEC,
+            <em>only </em> when strictly necessary and with contracts that
+            guarantee data protection (and limiting access to personal data when
+            possible).
+          </li>
+        </ul>
 
-      <h2>10. Derechos del usuario</h2>
-      <p>
-        El usuario puede ejercer los derechos de acceso, rectificación,
-        supresión, limitación y oposición (según corresponda por la normativa)
-        contactando al responsable:
-      </p>
-      <p>
-        <strong>Correo:</strong> sirc@reniec.gob.pe
-      </p>
+        <h2>7. International Transfers</h2>
+        <p>
+          If in the future the data is transferred outside the national
+          territory, RENIEC will ensure that the transfers are carried out in
+          accordance with applicable regulations and with adequate safeguards.
+        </p>
 
-      <h2>11. Declaración para Google Play (Data safety)</h2>
-      <p>Para facilitar la correcta declaración en Play Console, indicamos:</p>
-      <ul>
-        <li>
-          <strong>Datos recolectados:</strong> Identificadores (DNI/usuario),
-          Datos de contacto si se proporcionan en formularios, Datos técnicos
-          del dispositivo, Registros de uso y fallos.
-        </li>
-        <li>
-          <strong>Uso:</strong> Autenticación, funcionalidad del servicio,
-          diagnóstico, descarga de contenido.
-        </li>
-        <li>
-          <strong>Compartición:</strong> No se comparten con anunciantes ni
-          plataformas de analítica de terceros según las dependencias actuales.
-          Compartición limitada a requerimientos legales y proveedores técnicos
-          necesarios.
-        </li>
-        <li><strong>Encriptado en tránsito:</strong> Sí (HTTPS/TLS).</li>
-        <li>
-          <strong>Encriptado en reposo:</strong> Depende de la configuración de
-          servidor; las credenciales y tokens se almacenan con medidas de
-          seguridad en el backend y en el dispositivo según buenas prácticas.
-        </li>
-      </ul>
+        <h2>8. Information Security</h2>
+        <ul>
+          <li>Encrypted communications using HTTPS (TLS).</li>
+          <li>
+            Internal access controls and credential encryption in secure
+            storage.
+          </li>
+          <li>Monitoring and detection of unauthorized access.</li>
+          <li>
+            Minimizing the information recorded in logs (avoiding the inclusion
+            of sensitive data).
+          </li>
+        </ul>
 
-      <h2>12. Cambios en esta Política</h2>
-      <p>
-        RENIEC podrá actualizar esta política cuando sea necesario. Las
-        modificaciones se publicarán en esta página con la fecha de vigencia.
-      </p>
+        <h2>9. Data retention</h2>
+        <p>
+          The data will be retained while the user maintains their status as an
+          active civil registrar or for the periods required by applicable
+          regulations. Once the applicable retention period has expired, RENIEC
+          will proceed to delete or anonymize the data.
+        </p>
 
-      <h2>13. Contacto</h2>
-      <p>
-        Para dudas, consultas o solicitudes relacionadas con privacidad de
-        datos, por favor escribir a:
-      </p>
-      <p>
-        <strong>sirc@reniec.gob.pe</strong>
-      </p>
+        <h2>10. User Rights</h2>
+        <p>
+          The user may exercise the rights of access, rectification, erasure,
+          limitation and objection (as applicable under the regulations) by
+          contacting the data controller:
+        </p>
+        <p><strong>Email:</strong> sirc@reniec.gob.pe</p>
 
-      <hr style="margin-top: 26px" />
+        <h2>11. Declaration for Google Play (Data safety)</h2>
+        <p>To facilitate correct declaration in Play Console, we indicate:</p>
+        <ul>
+          <li>
+            <strong>Data collected:</strong> Identificadores (DNI/usuario),
+            Datos de contacto si se proporcionan en formularios, Datos técnicos
+            del dispositivo, Registros de uso y fallos.
+          </li>
+          <li>
+            <strong>Use:</strong> Authentication, service functionality,
+            diagnostics, content download.
+          </li>
+          <li>
+            <strong>Sharing:</strong> Data is not shared with advertisers or
+            third-party analytics platforms based on current dependencies.
+            Sharing is limited to legal requirements and necessary technical
+            providers.
+          </li>
+          <li><strong>Encrypted in transit:</strong> Yes (HTTPS/TLS).</li>
+          <li>
+            <strong>Encrypted at rest:</strong> Depends on server configuration;
+            credentials and tokens are stored with security measures on the
+            backend and on the device according to best practices.
+          </li>
+        </ul>
 
-      <h3>
-        Notas técnicas y buenas prácticas (para desarrolladores /
-        administradores)
-      </h3>
-      <ul>
-        <li>
-          Deshabilitar el <em>OkHttp logging interceptor</em> en producción o
-          filtrar datos sensibles antes de registrarlos.
-        </li>
-        <li>
-          Asegurar que todas las llamadas externas usen HTTPS y validar
-          certificados según políticas internas.
-        </li>
-        <li>
-          Revisar el uso de WRITE_EXTERNAL_STORAGE: migrar a APIs de
-          almacenamiento específico de app (Scoped Storage) en dispositivos
-          modernos.
-        </li>
-      </ul>
-    </main>
+        <h2>12. Changes to this Policy</h2>
+        <p>
+          RENIEC may update this policy when necessary. Modifications will be
+          published on this page with the effective date.
+        </p>
+
+        <h2>13. Contact</h2>
+        <p>
+          For questions, inquiries, or requests related to data privacy, please
+          write to:
+        </p>
+        <p>
+          <strong>sirc@reniec.gob.pe</strong>
+        </p>
+
+        <hr style="margin-top: 26px" />
+      </main>
+    </div>
 
     <footer class="footer-container">
       <div class="footer-inner">
@@ -394,5 +682,19 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      function openTab(tabId) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => c.classList.remove("active"));
+        document
+          .querySelectorAll(".tab")
+          .forEach((t) => t.classList.remove("active"));
+
+        document.getElementById(tabId).classList.add("active");
+        event.target.classList.add("active");
+      }
+    </script>
   </body>
 </html>
